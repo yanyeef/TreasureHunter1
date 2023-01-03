@@ -14,6 +14,7 @@ public class TreasureHunter
     private Hunter hunter;
     private boolean hardMode;
     private boolean easyMode;
+    private boolean cheatMode;
 
     //Constructor
     /**
@@ -48,24 +49,29 @@ public class TreasureHunter
         System.out.print("What's your name, Hunter? ");
         String name = scanner.nextLine();
 
-
-
-        System.out.print("Hard mode? (y/n): ");
+        System.out.print("Hard, easy or cheat mode: ");
         String hard = scanner.nextLine();
-        if (hard.equals("y") || hard.equals("Y"))
+        if (hard.equals("Hard") || hard.equals("hard"))
         {
             // set hunter instance variable
             hunter = new Hunter(name, 10);
             hardMode = true;
-        } else {
-            System.out.println("easy mode? (y/n): ");
-            String easy = scanner.nextLine();
-            if(easy.equals("y")|| easy.equals("Y")){
-                hunter = new Hunter(name, 15);
-                easyMode = true;
-            }
+        } else if(hard.equals("easy") || hard.equals("Easy")){
+            hunter = new Hunter(name, 15);
+            easyMode = true;
+        } else if(hard.equals("cheat") || hard.equals("Cheat")){
+            hunter = new Hunter(name, 15);
+            cheatMode = true;
         }
 
+    }
+
+    public String getMode(){
+        if(hardMode){
+            return "hardMode";
+        } else if(easyMode){
+            return "easyMode";
+        }
     }
 
     /**
@@ -143,40 +149,33 @@ public class TreasureHunter
         }
     }
 
-    /**
-     * Takes the choice received from the menu and calls the appropriate method to carry out the instructions.
-     * @param choice The action to process.
-     */
-    private void processChoice(String choice)
-    {
-        if (choice.equals("B") || choice.equals("b") || choice.equals("S") || choice.equals("s"))
+
+
+        /**
+         * Takes the choice received from the menu and calls the appropriate method to carry out the instructions.
+         * @param choice The action to process.
+         */
+        private void processChoice (String choice)
         {
-            currentTown.enterShop(choice);
-        }
-        else if (choice.equals("M") || choice.equals("m"))
-        {
-            if (currentTown.leaveTown())
-            {
-                //This town is going away so print its news ahead of time.
-                System.out.println(currentTown.getLatestNews());
-                enterTown();
+            if (choice.equals("B") || choice.equals("b") || choice.equals("S") || choice.equals("s")) {
+                currentTown.enterShop(choice);
+            } else if (choice.equals("M") || choice.equals("m")) {
+                if (currentTown.leaveTown()) {
+                    //This town is going away so print its news ahead of time.
+                    System.out.println(currentTown.getLatestNews());
+                    enterTown();
+                }
+            } else if (hardMode && (choice.equals("L") || choice.equals("l"))) {
+                currentTown.lookForTrouble();
+            } else if (choice.equals("H") || choice.equals("h")) {
+                currentTown.huntForTreasure();
+            } else if (choice.equals("X") || choice.equals("x")) {
+                System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
+            } else {
+                System.out.println("Yikes! That's an invalid option! Try again.");
             }
         }
-        else if (choice.equals("L") || choice.equals("l"))
-        {
-            currentTown.lookForTrouble();
-        }
-        else if (choice.equals("H") || choice.equals("h"))
-        {
-            currentTown.huntForTreasure();
-        }
-        else if (choice.equals("X") || choice.equals("x"))
-        {
-            System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
-        }
-        else
-        {
-            System.out.println("Yikes! That's an invalid option! Try again.");
-        }
+
+
     }
 }
