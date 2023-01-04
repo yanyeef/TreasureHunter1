@@ -72,6 +72,7 @@ public class TreasureHunter
         } else if(easyMode){
             return "easyMode";
         }
+        return "cheatMode";
     }
 
     /**
@@ -157,6 +158,8 @@ public class TreasureHunter
          */
         private void processChoice (String choice)
         {
+            String mode = getMode();
+            boolean m = mode.equals("easyMode");
             if (choice.equals("B") || choice.equals("b") || choice.equals("S") || choice.equals("s")) {
                 currentTown.enterShop(choice);
             } else if (choice.equals("M") || choice.equals("m")) {
@@ -165,8 +168,10 @@ public class TreasureHunter
                     System.out.println(currentTown.getLatestNews());
                     enterTown();
                 }
-            } else if (hardMode && (choice.equals("L") || choice.equals("l"))) {
+            } else if (!m && (choice.equals("L") || choice.equals("l"))) {
                 currentTown.lookForTrouble();
+            } else if(m && (choice.equals("L") || choice.equals("l"))){
+                currentTown.lookForTroubleEasy();
             } else if (choice.equals("H") || choice.equals("h")) {
                 currentTown.huntForTreasure();
             } else if (choice.equals("X") || choice.equals("x")) {
@@ -177,5 +182,5 @@ public class TreasureHunter
         }
 
 
-    }
+
 }

@@ -142,6 +142,46 @@ public class Town
         }
     }
 
+    public void lookForTroubleEasy()
+    {
+        double noTroubleChance;
+        if (toughTown)
+        {
+            noTroubleChance = 0.66;
+        }
+        else
+        {
+            noTroubleChance = 0.33;
+        }
+
+        if (Math.random() > noTroubleChance)
+        {
+            printMessage = "You couldn't find any trouble";
+        }
+        else
+        {
+            printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
+            int goldDiff = (int)(Math.random() * 15) + 5;
+            if (Math.random() > 0.1)
+            {
+                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
+                printMessage += "\nYou won the brawl and receive " +  (goldDiff + 8) + " gold.";
+                hunter.changeGold(goldDiff);
+            }
+            else
+            {
+                if(hunter.getGold() - goldDiff<0){
+                    printMessage += "What?! You don't have enough to pay up? Guess your time is up!";
+                    winCondition = 2;
+                } else{
+                    printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
+                    printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
+                    hunter.changeGold(-1 * goldDiff);
+                }
+            }
+        }
+    }
+
     public void huntForTreasure ()
     {
         String treasureStr = Treasure.getType();
