@@ -159,33 +159,39 @@ public class Shop
      */
     public int getCostOfItem(String item)
     {
+        int cost = 0;
         if (item.equals("Water") || item.equals("water"))
         {
-            return WATER_COST;
+            cost =  WATER_COST;
         }
         else if (item.equals("Rope") || item.equals("rope"))
         {
-            return ROPE_COST;
+            cost = ROPE_COST;
         }
         else if (item.equals("Machete") || item.equals("machete"))
         {
-            return MACHETE_COST;
+            cost = MACHETE_COST;
         }
         else if (item.equals("Horse") || item.equals("horse"))
         {
-            return HORSE_COST;
+            cost = HORSE_COST;
         }
         else if (item.equals("Boat") || item.equals("boat"))
         {
-            return BOAT_COST;
+            cost = BOAT_COST;
         }
         else if (item.equals("Boot") || item.equals("boot")){
-            return BOOT_COST;
+            cost =  BOOT_COST;
         }
         else
         {
-            return 0;
+            cost = 0;
         }
+        String mode = TreasureHunter.getMode();
+        if (mode.equals("easyMode")){
+            cost = cost/2;
+        }
+        return cost;
     }
 
     /**
