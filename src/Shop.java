@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Shop
 {
     // constants
-    private static final int WATER_COST = 2;
+    private static final int WATER_COST = 3;
     private static final int ROPE_COST = 4;
     private static final int MACHETE_COST = 6;
     private static final int HORSE_COST = 12;
@@ -87,14 +87,26 @@ public class Shop
      */
     public String inventory()
     {
-        String str = "__________________________\n";
-        str += "|   Water   |    " + WATER_COST + " gold   |\n";
-        str += "|   Rope    |    " + ROPE_COST + " gold   |\n";
-        str += "|  Machete  |   " + MACHETE_COST + " gold    |\n";
-        str += "|   Horse   |   " + HORSE_COST + " gold   |\n";
-        str += "|   Boat    |   " + BOAT_COST + " gold   |\n";
-        str += "|   Boot    |   " + BOOT_COST + " gold   |\n";
-        str += "--------------------------\n";
+        String str = "";
+        if(TreasureHunter.getMode().equals("hardMode")) {
+            str = "__________________________\n";
+            str += "|   Water   |    " + WATER_COST + " gold   |\n";
+            str += "|   Rope    |    " + ROPE_COST + " gold   |\n";
+            str += "|  Machete  |   " + MACHETE_COST + " gold    |\n";
+            str += "|   Horse   |   " + HORSE_COST + " gold   |\n";
+            str += "|   Boat    |   " + BOAT_COST + " gold   |\n";
+            str += "|   Boot    |   " + BOOT_COST + " gold   |\n";
+            str += "--------------------------\n";
+        } else if (TreasureHunter.getMode().equals("easyMode")){
+            str = "__________________________\n";
+            str += "|   Water   |    " + (WATER_COST - 2)+ " gold   |\n";
+            str += "|   Rope    |    " + (ROPE_COST - 2) + " gold   |\n";
+            str += "|  Machete  |   " + (MACHETE_COST -2) + " gold    |\n";
+            str += "|   Horse   |   " + (HORSE_COST -2) + " gold   |\n";
+            str += "|   Boat    |   " + (BOAT_COST-2) + " gold   |\n";
+            str += "|   Boot    |   " + (BOOT_COST -2 )+ " gold   |\n";
+            str += "--------------------------\n";
+        }
 
         return str;
     }
@@ -189,7 +201,7 @@ public class Shop
         }
         String mode = TreasureHunter.getMode();
         if (mode.equals("easyMode")){
-            cost = cost/2;
+            cost = cost - 2;
         }
         return cost;
     }

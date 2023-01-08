@@ -12,8 +12,8 @@ public class TreasureHunter
     //Instance variables
     private Town currentTown;
     private Hunter hunter;
-    private boolean hardMode;
-    private boolean easyMode;
+    private static boolean hardMode;
+    private static boolean easyMode;
     private boolean cheatMode;
 
     //Constructor
@@ -66,7 +66,7 @@ public class TreasureHunter
 
     }
 
-    public String getMode(){
+    public static String getMode(){
         if(hardMode){
             return "hardMode";
         } else if(easyMode){
