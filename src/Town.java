@@ -139,6 +139,7 @@ public class Town
                     hunter.changeGold(-1 * goldDiff);
                 }
             }
+
         }
     }
 
@@ -166,7 +167,7 @@ public class Town
             {
                 printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
                 printMessage += "\nYou won the brawl and receive " +  (goldDiff + 8) + " gold.";
-                hunter.changeGold(goldDiff);
+                hunter.changeGold(goldDiff + 8);
             }
             else
             {
@@ -178,6 +179,33 @@ public class Town
                     printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
                     hunter.changeGold(-1 * goldDiff);
                 }
+            }
+        }
+    }
+    public void lookForTroubleCheat()
+    {
+        double noTroubleChance;
+        if (toughTown)
+        {
+            noTroubleChance = 0.66;
+        }
+        else
+        {
+            noTroubleChance = 0.33;
+        }
+
+        if (Math.random() > noTroubleChance)
+        {
+            printMessage = "You couldn't find any trouble";
+        }
+        else
+        {
+            printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
+            if (Math.random() > 0)
+            {
+                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
+                printMessage += "\nYou won the brawl and receive " +  100 + " gold.";
+                hunter.changeGold(100);
             }
         }
     }

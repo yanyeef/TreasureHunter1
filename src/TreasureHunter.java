@@ -71,8 +71,9 @@ public class TreasureHunter
             return "hardMode";
         } else if(easyMode){
             return "easyMode";
+        } else {
+            return "cheatMode";
         }
-        return "cheatMode";
     }
 
     /**
@@ -156,8 +157,7 @@ public class TreasureHunter
          * Takes the choice received from the menu and calls the appropriate method to carry out the instructions.
          * @param choice The action to process.
          */
-        private void processChoice (String choice)
-        {
+        private void processChoice (String choice) {
             String mode = getMode();
             boolean m = mode.equals("easyMode");
             if (choice.equals("B") || choice.equals("b") || choice.equals("S") || choice.equals("s")) {
@@ -168,11 +168,13 @@ public class TreasureHunter
                     System.out.println(currentTown.getLatestNews());
                     enterTown();
                 }
-            } else if (!m && (choice.equals("L") || choice.equals("l"))) {
+            } else if (getMode().equals("hardMode") && (choice.equals("L") || choice.equals("l"))) {
                 currentTown.lookForTrouble();
-            } else if(m && (choice.equals("L") || choice.equals("l"))){
+            } else if (m && (choice.equals("L") || choice.equals("l"))) {
                 currentTown.lookForTroubleEasy();
-            } else if (choice.equals("H") || choice.equals("h")) {
+            }else if(getMode().equals("cheatMode")&& (choice.equals("L") || choice.equals("l"))){
+                currentTown.lookForTroubleCheat();
+            }else if (choice.equals("H") || choice.equals("h")) {
                 currentTown.huntForTreasure();
             } else if (choice.equals("X") || choice.equals("x")) {
                 System.out.println("Fare thee well, " + hunter.getHunterName() + "!");

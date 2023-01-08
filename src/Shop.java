@@ -106,6 +106,15 @@ public class Shop
             str += "|   Boat    |   " + (BOAT_COST-2) + " gold   |\n";
             str += "|   Boot    |   " + (BOOT_COST -2 )+ " gold   |\n";
             str += "--------------------------\n";
+        } else if (TreasureHunter.getMode().equals("cheatMode")){
+            str = "__________________________\n";
+            str += "|   Water   |    " + 1 + " gold   |\n";
+            str += "|   Rope    |    " + 1 + " gold   |\n";
+            str += "|  Machete  |    " + 1 + " gold   |\n";
+            str += "|   Horse   |    " + 1 + " gold   |\n";
+            str += "|   Boat    |    " + 1 + " gold   |\n";
+            str += "|   Boot    |    " + 1+ " gold   |\n";
+            str += "--------------------------\n";
         }
 
         return str;
@@ -202,6 +211,9 @@ public class Shop
         String mode = TreasureHunter.getMode();
         if (mode.equals("easyMode")){
             cost = cost - 2;
+        }
+        if (mode.equals("cheatMode")){
+            cost = 1;
         }
         return cost;
     }
